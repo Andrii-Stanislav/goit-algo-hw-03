@@ -8,25 +8,27 @@ def koch_curve(t, order, size):
             koch_curve(t, order - 1, size / 3)
             t.left(angle)
 
-def draw_koch_curve(order, size=300):
+def draw_koch_snowflake(order, size=300):
     window = turtle.Screen()
     window.bgcolor("white")
 
     t = turtle.Turtle()
     t.speed(0)  
     t.penup()
-    t.goto(-size / 2, 0)
+    t.goto(-size / 2, size / 3)  # Adjusted starting position
     t.pendown()
 
-    koch_curve(t, order, size)
+    # Draw three sides of the snowflake
+    for _ in range(3):
+        koch_curve(t, order, size)
+        t.right(120)  # Turn 120 degrees to form a triangle
 
     window.mainloop()
-
 
 def main():
     while True:
         try:
-            order = int(input("Enter the order of the Koch curve: "))
+            order = int(input("Enter the order of the Koch snowflake: "))
             if order >= 0:
                 break
             print("Please enter a non-negative integer.")
@@ -35,14 +37,14 @@ def main():
 
     while True:
         try:
-            size = int(input("Enter the size of the Koch curve: "))
+            size = int(input("Enter the size of the Koch snowflake: "))
             if size > 0:
                 break
             print("Please enter a positive integer.")
         except ValueError:
             print("Please enter a valid integer.")
     
-    draw_koch_curve(order, size)
+    draw_koch_snowflake(order, size)
 
 if __name__ == "__main__":
     main()

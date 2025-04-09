@@ -1,5 +1,6 @@
 import os
 import shutil
+import argparse
 
 
 def copy_files(source_path, dest_path):
@@ -32,10 +33,14 @@ def copy_files(source_path, dest_path):
         print(f"Error processing {source_path}: {e}")
 
 def main():
+    parser = argparse.ArgumentParser(description='Copy and sort files by extension')
+    parser.add_argument('source_dir', help='Source directory path')
+    parser.add_argument('dest_dir', nargs='?', default='dist', help='Destination directory path (default: dist)')
     
-    source_dir = input("Enter the source directory: ")
-    dest_dir = input("Enter the destination directory: ")
+    args = parser.parse_args()
     
+    source_dir = args.source_dir
+    dest_dir = args.dest_dir
     
     # Check if source directory exists
     if not os.path.exists(source_dir):
